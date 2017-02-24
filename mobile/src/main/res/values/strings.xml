@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Mapping Baseapp</string>
+    <string name="basemap_url">http://maps.gov.bc.ca/arcserver/rest/services/Province/albers_cache/MapServer</string>
+</resources>

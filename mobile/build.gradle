@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "exp.bcit.teezha.mappingbaseapp"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    packagingOptions
+            {
+                exclude 'META-INF/LGPL2.1'
+                exclude 'META-INF/LICENSE'
+                exclude 'META-INF/NOTICE'
+            }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    wearApp project(':wear')
+    compile 'com.google.android.gms:play-services:10.2.0'
+    //noinspection GradleCompatible
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    testCompile 'junit:junit:4.12'
+    compile 'com.esri.arcgis.android:arcgis-android:10.2.7'
+
+}
