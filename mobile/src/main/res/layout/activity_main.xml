@@ -13,23 +13,16 @@
     <Spinner
         android:id="@+id/spnParcels"
         android:layout_width="match_parent"
-        android:layout_height="60dip" >
+        android:layout_height="60dip">
     </Spinner>
 
     <com.esri.android.map.MapView
         android:id="@+id/map"
         android:layout_width="fill_parent"
         android:layout_height="350dip"
-        android:layout_below="@id/spnParcels">
+        android:layout_below="@id/spnParcels"
+        android:layout_alignParentBottom="true">
     </com.esri.android.map.MapView>
-
-    <Button
-        android:id="@+id/btnZoom"
-        android:layout_width="match_parent"
-        android:layout_height="50dip"
-        android:text="@string/btnZoomText"
-        android:layout_below="@id/map"
-        android:onClick="zoomToFeature (MainActivity)" />
 
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -15,8 +16,6 @@ import android.widget.Toast;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
 import com.esri.android.map.event.OnStatusChangedListener;
-import com.esri.core.geometry.Envelope;
-import com.esri.core.geometry.Point;
 import com.esri.core.map.Feature;
 import com.esri.core.map.FeatureResult;
 import com.esri.core.tasks.query.QueryParameters;
@@ -71,6 +70,20 @@ public class MainActivity extends AppCompatActivity implements OnStatusChangedLi
 
         mLotLayerURL = getString(R.string.basemap_url) + "/" + mLotLayerID;
         QueryTask qtask = new QueryTask(mLotLayerURL);
+
+        mSpnParcels.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                try {
+                    zoomToFeature(view);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
 
 
         try {
@@ -159,40 +172,29 @@ public class MainActivity extends AppCompatActivity implements OnStatusChangedLi
      * import android.view.View;
      * =============================================================================
      */
-    public void zoomToFeature(View v) {
+    public void zoomToFeature(View v) throws Exception {
 
         /** =============================================================================
          * Your code goes here
          * ============================================================================= */
 
-        quickToast("Inside ZoomToFeature");
+        //quickToast("Inside ZoomToFeature");
 
-        QueryParameters qryLotNums = new QueryParameters();
-        qryLotNums.setReturnGeometry(true);
-        qryLotNums.setOutFields(new String[]{mLotNumColName});
-        qryLotNums.setWhere((String) mSpnParcels.getSelectedItem());
+        QueryParameters zoomParams = new QueryParameters();
+        zoomParams.setReturnGeometry(true);
+        zoomParams.setOutFields(new String[]{mLotNumColName});
+        zoomParams.setWhere(mLotNumColName+" = "+mSpnParcels.getSelectedItem().toString());
+        quickToast(mLotNumColName+"="+mSpnParcels.getSelectedItem().toString());
 
-        mLotLayerURL = getString(R.string.basemap_url) + "/" + mLotLayerID;
         QueryTask qtask = new QueryTask(mLotLayerURL);
 
         try {
             /** ================================
              * add your code here
              * ==================================*/
-            FeatureResult fSet = qtask.execute(qryLotNums);
+            FeatureResult fSet = qtask.execute(zoomParams);
             Feature tmpFeat = (Feature) fSet.iterator().next();
-
-            Envelope epFeat = new Envelope((Point) tmpFeat.getGeometry());
-
-            getMapView().setExtent(epFeat);
-
-
-
-
-
-
-
-
+            getMapView().setExtent(tmpFeat.getGeometry());
         } catch (Exception e) {
             Log.d("GIST-8010", e.getMessage());
         }
