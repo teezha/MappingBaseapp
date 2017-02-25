@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Mapping Baseapp</string>
     <string name="basemap_url">http://vm131.athena.bcit.ca:6080/arcgis/rest/services/gist_8010_test_ms/MapServer</string>
-    <string name="btnZoomText">Zoom</string>
 
 
 </resources>
