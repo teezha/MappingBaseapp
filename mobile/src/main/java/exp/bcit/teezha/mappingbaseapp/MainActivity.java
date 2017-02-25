@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements OnStatusChangedLi
         addBCLayer();
         getMapView().setOnStatusChangedListener(this);
 
-        this.mBtnZoom = (Button) findViewById(R.id.btnZoom);
         this.mSpnParcels = (Spinner) findViewById(R.id.spnParcels);
 
         QueryParameters qryLotNums = new QueryParameters();
