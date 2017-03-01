@@ -1,5 +1,22 @@
 package exp.bcit.teezha.mappingbaseapp;
-
+//==============================================================================
+// File         : mapping andro app
+//
+// Current Author: Toby Zhang
+//
+// Previous Author: None
+//
+// Contact Info: somebody@somewhere.com
+//
+// Purpose :
+//
+// Dependencies: None
+//
+// Modification Log :
+//    --> Created MMM-DD-YYYY (fl)
+//    --> Updated MMM-DD-YYYY (fl)
+//
+// =============================================================================
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
